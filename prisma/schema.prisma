@@ -12,8 +12,8 @@ datasource db {
 
 
 enum Role {
-  USER
-  ADMIN
+  user
+  admin
 }
 
 // Define the User model
@@ -22,7 +22,7 @@ model User {
   username  String   @unique
   email     String   @unique
   password  String
-  role      Role @default(USER)
+  role      Role @default(user)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
   posts     Post[]

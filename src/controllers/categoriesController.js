@@ -4,6 +4,13 @@ const prisma = new PrismaClient();
 exports.getAllCategories = async (req, res, next) => {
   try {
     const categories = await prisma.category.findMany();
+    if (!categories) {
+      return res.status(404).json({
+        success: false,
+        message: "No categories found",
+      });
+    }
+
     res.status(200).json({
       success: true,
       data: categories,
@@ -21,6 +28,14 @@ exports.getCategory = async (req, res, next) => {
         id: Number(id),
       },
     });
+
+    if (!category) {
+      return res.status(404).json({
+        success: false,
+        message: "Category not found",
+      });
+    }
+
     res.status(200).json({
       success: true,
       data: category,
